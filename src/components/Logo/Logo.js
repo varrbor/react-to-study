@@ -1,12 +1,27 @@
 import React from 'react';
-
 import burgerLogo from '../../assets/images/burger-logo.png';
-import classes from './Logo.css';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
 
-const logo = (props) => (
-    <div className={classes.Logo} style={{height: props.height}}>
-        <img src={burgerLogo} alt="MyBurger" />
-    </div>
-);
+const useStyles = makeStyles({
+    root: {
+        backgroundColor: 'white',
+        padding: '8px',
+        height: '100%',
+        boxSizing: 'border-box',
+        borderRadius: '5px',
+        '& img': {
+            height: '100%'
+        }
+    }
+});
 
-export default logo;
+export default function Logo() {
+    const classes = useStyles();
+
+    return (
+        <Box className={ classes.root } >
+            <img src={burgerLogo} alt="MyBurger" />
+        </Box>
+    );
+}
