@@ -1,18 +1,17 @@
 import React from 'react';
-
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import {Box, makeStyles} from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     Toolbar: {
     height: '56px',
     width: '100%',
     position: 'fixed',
     top: '0',
     left: '0',
-    backgroundColor: '#703B09',
+    backgroundColor: theme.header,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -22,7 +21,6 @@ const useStyles = makeStyles({
         '& nav': {
             height: '100%'
         }
-
     },
 
     Logo: {
@@ -30,11 +28,11 @@ const useStyles = makeStyles({
     },
 
     ['@media (max-width: 499px)']: {
-    DesktopOnly: {
+        DesktopOnly: {
             display: 'none'
         }
     }
-});
+}));
 
 export default function toolbar(props) {
     const classes = useStyles();
