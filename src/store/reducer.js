@@ -2,7 +2,8 @@ import * as actionTypes from './actions';
 
 const initialState = {
     ingredients: null,
-    totalPrice: 4
+    totalPrice: 4,
+    loading: false
 };
 
 const INGREDIENT_PRICES = {
@@ -35,11 +36,16 @@ const reducer = (state = initialState, action) => {
         }
 
         case actionTypes.SET_INGREDIENTS:
-            console.log(555555,action)
         return {
             ...state,
                 ingredients: action.ingredients,
             totalPrice: 4,
+        }
+
+        case actionTypes.TOGGLE_LOADING_STATE:
+        return {
+            ...state,
+            loading: !state.loading,
         }
         default:
             return state;

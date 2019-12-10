@@ -24,9 +24,11 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
+        this.props.onStartFetchData();
         axios.get( 'https://key-mystery-213512.firebaseio.com/ingredients.json' )
             .then( response => {
                 this.props.onSetIngredients(response.data);
+                this.props.onFinishFetchData();
             } )
             .catch( error => {
                 console.log('error')
@@ -65,9 +67,9 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummary = null;
-        let burger = this.state.error ? <p>Ingredients can't be loaded!</p> : <Spinner />;
+        let burger = <Spinner />;
 
-        if ( this.props.ings ) {
+        if ( this.props.ings && !this.props.loading ) {
             burger = (
                 <Aux>
                     <Burger ingredients={this.props.ings} />
@@ -86,7 +88,7 @@ class BurgerBuilder extends Component {
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler} />;
         }
-        if ( this.state.loading ) {
+        if ( this.props.loading ) {
             orderSummary = <Spinner />;
         }
 
@@ -104,7 +106,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.ingredients,
-        price: state.totalPrice
+        price: state.totalPrice,
+        loading: state.loading
     }
 }
 
@@ -112,7 +115,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingName) => dispatch({type:actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
         onIngredientRemoved: (ingName) => dispatch({type:actionTypes.REMOVE_INGREDIENT, ingredientName: ingName}),
-        onSetIngredients: (ings) => dispatch({type:actionTypes.SET_INGREDIENTS, ingredients: ings})
+        onSetIngredients: (ings) => dispatch({type:actionTypes.SET_INGREDIENTS, ingredients: ings}),
+        onStartFetchData: () => dispatch({type:actionTypes.TOGGLE_LOADING_STATE }),
+        onFinishFetchData: () => dispatch({type:actionTypes.TOGGLE_LOADING_STATE })
     }
 }
 
