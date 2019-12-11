@@ -9,8 +9,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 import { connect } from "react-redux";
-import  * as actionTypes from "../../store/actions";
-
+import * as actions from '../../store/actions/index';
 class BurgerBuilder extends Component {
     // constructor(props) {
     //     super(props);
@@ -24,15 +23,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
-        this.props.onStartFetchData();
-        axios.get( 'https://key-mystery-213512.firebaseio.com/ingredients.json' )
-            .then( response => {
-                this.props.onSetIngredients(response.data);
-                this.props.onFinishFetchData();
-            } )
-            .catch( error => {
-                console.log('error')
-            } );
+        this.props.onInitIngredients();
     }
 
     updatePurchaseState ( ingredients ) {
@@ -113,11 +104,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingName) => dispatch({type:actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
-        onIngredientRemoved: (ingName) => dispatch({type:actionTypes.REMOVE_INGREDIENT, ingredientName: ingName}),
-        onSetIngredients: (ings) => dispatch({type:actionTypes.SET_INGREDIENTS, ingredients: ings}),
-        onStartFetchData: () => dispatch({type:actionTypes.TOGGLE_LOADING_STATE }),
-        onFinishFetchData: () => dispatch({type:actionTypes.TOGGLE_LOADING_STATE })
+        onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
+        onInitIngredients: () => dispatch(actions.initIngredients())
     }
 }
 
