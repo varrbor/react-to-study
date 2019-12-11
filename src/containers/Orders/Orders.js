@@ -4,6 +4,8 @@ import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actionTypes from "../../store/actions/actionTypes";
+import * as actions from '../../store/actions/index';
+
 import {connect} from "react-redux";
 import Spinner from '../../components/UI/Spinner/Spinner';
 
@@ -13,7 +15,7 @@ class Orders extends Component {
     }
 
     componentDidMount() {
-        this.props.onStartFetchOrders();
+        // this.props.onStartFetchOrders();
         axios.get('/orders.json')
             .then(res => {
                 const fetchedOrders = [];
@@ -24,7 +26,7 @@ class Orders extends Component {
                     });
                 }
                 this.setState({orders: fetchedOrders});
-                this.props.onFinishFetchOrders();
+                // this.props.onFinishFetchOrders();
 
             })
             .catch(err => {
