@@ -28,17 +28,28 @@ export const toggleLoadingState = () => {
     };
 };
 
-export const initIngredients = () => {
+export const fetchIngredientsStart = () => {
+    return {
+        type: actionTypes.FETCH_INGREDIENTS_START
+    }
+}
 
-    return dispatch => {
-        dispatch(toggleLoadingState());
-        axios.get( 'https://key-mystery-213512.firebaseio.com/ingredients.json' )
-            .then( response => {
-                dispatch(setIngredients(response.data));
-                dispatch(toggleLoadingState());
-            } )
-            .catch( error => {
-                console.log('request error')
-            } );
-    };
-};
+export const fetchIngredientsSuccess = ingredients => {
+    return {
+        type: actionTypes.FETCH_INGREDIENTS_SUCCESS,
+        ingredients: ingredients
+    }
+}
+
+export const fetchIngredientsFail = err => {
+    return {
+        type: actionTypes.FETCH_INGREDIENTS_FAIL,
+        err: err
+    }
+}
+
+export const fetchIngredients = () => {
+    return {
+        type: actionTypes.FETCH_INGREDIENTS
+    }
+}

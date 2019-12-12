@@ -10,6 +10,9 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 import { connect } from "react-redux";
 import * as actions from '../../store/actions/index';
+import { useDispatch, useSelector } from 'react-redux'
+
+
 class BurgerBuilder extends Component {
     // constructor(props) {
     //     super(props);
@@ -23,8 +26,13 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
-        this.props.onInitIngredients();
+        this.props.onGetIngredients();
     }
+
+    // shouldComponentUpdate () {
+    //
+    //     return false;
+    // }
 
     updatePurchaseState ( ingredients ) {
         const sum = Object.keys( ingredients )
@@ -106,7 +114,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
         onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
-        onInitIngredients: () => dispatch(actions.initIngredients())
+        onGetIngredients: () => dispatch(actions.fetchIngredients())
     }
 }
 

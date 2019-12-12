@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import { watchIngredients } from './store/sagas/index';
 
 
 import './index.css';
@@ -12,11 +14,14 @@ import registerServiceWorker from './registerServiceWorker';
 import reducer from './store/reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const sagaMiddleware = createSagaMiddleware();
 
 
 const store = createStore(reducer, composeEnhancers(
-    applyMiddleware(thunk)
-));
+    applyMiddleware(sagaMiddleware))
+);
+
+sagaMiddleware.run(watchIngredients)
 
 const app = (
     <Provider store={store}>

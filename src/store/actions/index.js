@@ -2,5 +2,9 @@ export {
     addIngredient,
     removeIngredient,
     toggleLoadingState,
-    initIngredients
+    setIngredients,
+    fetchIngredientsSuccess,
+    fetchIngredientsFail,
+    fetchIngredientsStart,
+    fetchIngredients
 } from './burgerBuilder';
