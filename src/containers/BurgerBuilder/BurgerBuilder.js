@@ -10,8 +10,6 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 import { connect } from "react-redux";
 import * as actions from '../../store/actions/index';
-import { useDispatch, useSelector } from 'react-redux'
-
 
 class BurgerBuilder extends Component {
     // constructor(props) {
@@ -28,11 +26,6 @@ class BurgerBuilder extends Component {
     componentDidMount () {
         this.props.onGetIngredients();
     }
-
-    // shouldComponentUpdate () {
-    //
-    //     return false;
-    // }
 
     updatePurchaseState ( ingredients ) {
         const sum = Object.keys( ingredients )
