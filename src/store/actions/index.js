@@ -8,3 +8,10 @@ export {
     fetchIngredientsStart,
     fetchIngredients
 } from './burgerBuilder';
+
+export {
+    fetchOrdersSuccess,
+    fetchOrdersFail,
+    fetchOrdersStart,
+    fetchOrders
+} from './order';

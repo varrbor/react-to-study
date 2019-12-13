@@ -21,12 +21,6 @@ export const setIngredients = ( ingredients ) => {
     };
 };
 
-export const toggleLoadingState = () => {
-    return {
-        type: actionTypes.TOGGLE_LOADING_STATE
-    };
-};
-
 export const fetchIngredientsStart = () => {
     return {
         type: actionTypes.FETCH_INGREDIENTS_START
