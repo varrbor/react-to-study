@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import ContactDataForm from '../../../components/Checkout/ContactData/ContactData';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import axios from '../../../axios-orders';
 import { connect } from "react-redux";
 import { checkValidity } from "../../../shared/utility";
 import * as actions from "../../../store/actions";
-import {Redirect} from "react-router-dom";
-
 
 class ContactData extends Component {
     orderHandler = ( event ) => {
@@ -36,7 +33,6 @@ class ContactData extends Component {
         updatedOrderForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm) {
-
             formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
         }
         this.props.onInputChangedHandler({identifier: inputIdentifier, val: updatedFormElement, formIsValid: formIsValid} );

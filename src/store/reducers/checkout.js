@@ -119,11 +119,18 @@ const sendOrderSuccess = ( state, action ) => {
         loading: false
     }};
 
+const sendOrderFail = ( state, action ) => {
+    return {
+        ...state,
+        ...{ err: action.err, loading: false }
+    }};
+
 const checkoutReducer = (state = initialState, action) => {
     switch ( (action.type)) {
         case actionTypes.INPUT_HANDLER: return inputHandler( state, action );
         case actionTypes.SEND_ORDER_START: return sendOrderStart( state, action );
         case actionTypes.SEND_ORDER_SUCCESS: return sendOrderSuccess( state, action );
+        case actionTypes.FETCH_ORDERS_FAIL: return sendOrderFail( state, action );
 
         default:
             return state;
