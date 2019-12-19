@@ -106,9 +106,24 @@ const inputHandler = ( state, action ) => {
     }
 };
 
+const sendOrderStart = ( state, action ) => {
+    return {
+        ...state,
+        loading: true
+    }
+};
+
+const sendOrderSuccess = ( state, action ) => {
+    return {
+        ...state,
+        loading: false
+    }};
+
 const checkoutReducer = (state = initialState, action) => {
     switch ( (action.type)) {
         case actionTypes.INPUT_HANDLER: return inputHandler( state, action );
+        case actionTypes.SEND_ORDER_START: return sendOrderStart( state, action );
+        case actionTypes.SEND_ORDER_SUCCESS: return sendOrderSuccess( state, action );
 
         default:
             return state;

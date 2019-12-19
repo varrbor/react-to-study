@@ -17,5 +17,8 @@ export {
 } from './order';
 
 export {
-    inputHandler
+    inputHandler,
+    sendOrder,
+    sendOrderStart,
+    sendOrderSuccess
 } from './checkout';

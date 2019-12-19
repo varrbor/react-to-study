@@ -9,3 +9,22 @@ export const inputHandler = (param) => {
     }
 }
 
+export const sendOrder = (order) => {
+    return {
+        type: actionTypes.SEND_ORDER,
+        order: order
+    }
+}
+
+export const sendOrderStart = () => {
+    return {
+        type: actionTypes.SEND_ORDER_START,
+    }
+}
+
+export const sendOrderSuccess = () => {
+    return {
+        type: actionTypes.SEND_ORDER_SUCCESS,
+    }
+}
+

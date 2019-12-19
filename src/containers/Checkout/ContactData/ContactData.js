@@ -5,11 +5,12 @@ import axios from '../../../axios-orders';
 import { connect } from "react-redux";
 import { checkValidity } from "../../../shared/utility";
 import * as actions from "../../../store/actions";
+import {Redirect} from "react-router-dom";
+
 
 class ContactData extends Component {
     orderHandler = ( event ) => {
         event.preventDefault();
-        this.setState( { loading: true } );
         const formData = {};
         for (let formElementIdentifier in this.props.orderForm) {
             formData[formElementIdentifier] = this.props.orderForm[formElementIdentifier].value;
@@ -19,14 +20,7 @@ class ContactData extends Component {
             price: this.props.price,
             orderData: formData
         }
-        axios.post( '/orders.json', order )
-            .then( response => {
-                this.setState( { loading: false } );
-                this.props.history.push( '/' );
-            } )
-            .catch( error => {
-                this.setState( { loading: false } );
-            } );
+        this.props.onSendOrders(order);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -57,17 +51,17 @@ class ContactData extends Component {
             });
         }
 
-        let form = null;
+       let form = <ContactDataForm
+           formElementsArray={formElementsArray}
+           orderHandler={this.orderHandler}
+           onChange={this.inputChangedHandler}
+           formIsValid={this.props.formIsValid}/>;
+
         if ( this.props.loading ) {
             form = <Spinner />;
         }
-        return (
-             <ContactDataForm
-                formElementsArray={formElementsArray}
-                orderHandler={this.orderHandler}
-                onChange={this.inputChangedHandler}
-                formIsValid={this.props.formIsValid}/>
-        );
+
+        return  form ;
     }
 }
 
@@ -83,7 +77,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInputChangedHandler: (nextState) => dispatch(actions.inputHandler(nextState))
+        onInputChangedHandler: (nextState) => dispatch(actions.inputHandler(nextState)),
+        onSendOrders: (order) => dispatch(actions.sendOrder(order))
     }
 }
 
