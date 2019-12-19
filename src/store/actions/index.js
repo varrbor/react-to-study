@@ -15,3 +15,7 @@ export {
     fetchOrdersStart,
     fetchOrders
 } from './order';
+
+export {
+    inputHandler
+} from './checkout';

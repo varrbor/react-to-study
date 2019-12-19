@@ -95,24 +95,24 @@ const INGREDIENT_PRICES = {
     bacon: 0.7
 };
 
-const addIngredient = ( state, action ) => {
+const inputHandler = ( state, action ) => {
     return {
         ...state,
-        ingredients: {
-            ...state.ingredients,
-            [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+        orderForm: {
+            ...state.orderForm,
+            [action.updatedOrderFormName]: action.val
         },
-        totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+        formIsValid: action.formIsValid
     }
 };
 
-const burgerReducer = (state = initialState, action) => {
+const checkoutReducer = (state = initialState, action) => {
     switch ( (action.type)) {
-        case actionTypes.ADD_INGREDIENT: return addIngredient( state, action );
+        case actionTypes.INPUT_HANDLER: return inputHandler( state, action );
 
         default:
             return state;
     }
 };
 
-export default burgerReducer;
+export default checkoutReducer;

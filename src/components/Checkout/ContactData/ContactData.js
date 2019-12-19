@@ -23,11 +23,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function contactDataForm(props) {
     const classes = useStyles();
-
     return (
         <div className={classes.ContactData}>
+
             <h4>Enter your Contact Data</h4>
             <form onSubmit={props.orderHandler}>
+
                 {props.formElementsArray.map(formElement => (
                     <Input
                         key={formElement.id}

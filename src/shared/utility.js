@@ -25,6 +25,6 @@ export const checkValidity = ( value, rules ) => {
         const pattern = /^\d+$/;
         isValid = pattern.test( value ) && isValid
     }
-
+    console.log('111utility', isValid)
     return isValid;
 }
