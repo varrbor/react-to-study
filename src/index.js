@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { watchIngredients } from './store/sagas/index';
+import logger from "./middlewares/logger";
+
 
 
 import './index.css';
@@ -22,7 +24,7 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(sagaMiddleware))
+    applyMiddleware(sagaMiddleware, logger))
 );
 
 sagaMiddleware.run(watchIngredients)
