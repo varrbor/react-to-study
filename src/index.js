@@ -14,13 +14,15 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import burgerBuilderReducer from './store/reducers/burgerReducer';
 import orderReducer from './store/reducers/order';
+import checkoutReducer from './store/reducers/checkout';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
-    order: orderReducer
+    order: orderReducer,
+    checkout: checkoutReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

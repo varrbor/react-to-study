@@ -15,3 +15,10 @@ export {
     fetchOrdersStart,
     fetchOrders
 } from './order';
+
+export {
+    inputHandler,
+    sendOrder,
+    sendOrderStart,
+    sendOrderSuccess
+} from './checkout';

@@ -2,9 +2,10 @@ import React from 'react';
 
 import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+import {Redirect} from "react-router-dom";
 
 const burger = ( props ) => {
-    console.log(props);
+    if(!props.ingredients) return <Redirect to="/" />;
     let transformedIngredients = Object.keys( props.ingredients )
         .map( igKey => {
             return [...Array( props.ingredients[igKey] )].map( ( _, i ) => {
